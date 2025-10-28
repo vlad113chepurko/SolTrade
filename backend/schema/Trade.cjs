@@ -1,4 +1,3 @@
-const { time } = require("console");
 const mongoose = require("mongoose");
 
 const tradeSchema = new mongoose.Schema({
@@ -6,6 +5,7 @@ const tradeSchema = new mongoose.Schema({
   user_id: { type: String, required: true },
   token: { type: String, required: true },
   side: { type: String, required: true },
+  amount: { type: Number, required: false },
   tx_hash: { type: String, required: true },
   timestamp: { type: Date, required: true, default: Date.now },
 });

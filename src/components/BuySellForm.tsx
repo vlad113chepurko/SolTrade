@@ -1,17 +1,22 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 export default function BuySellForm() {
   const [token, setToken] = useState<string>("");
   const [amount, setAmount] = useState<number>(0);
-  const [action, setAction] = useState<"buy" | "sell">("buy");
+  const [side, setSide] = useState<"buy" | "sell">("buy");
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    const res = axios.post(`http://localhost:5000/${action}`, {
-      userId: 1,
-      token,
-      amount,
-    });
-    console.log((await res).data);
+  const handleSubmit = async () => {
+    try {
+      const res = axios.post(`http://localhost:5000/${side}`, {
+        user_id: 1,
+        token,
+        amount,
+        side,
+      });
+      console.log((await res).data);
+    } catch (error) {
+      console.error("Error submitting trade:", error);
+    }
   };
 
   return (
@@ -20,8 +25,8 @@ export default function BuySellForm() {
       <select
         name="action"
         id="action"
-        value={action}
-        onChange={(e) => setAction(e.target.value as "buy" | "sell")}
+        value={side}
+        onChange={(e) => setSide(e.target.value as "buy" | "sell")}
       >
         <option value="buy">Buy</option>
         <option value="sell">Sell</option>
@@ -37,9 +42,7 @@ export default function BuySellForm() {
         type="number"
         placeholder="Amount"
       />
-      <button type="button" onClick={handleSubmit}>
-        Submit
-      </button>
+      <button onClick={handleSubmit}>Submit</button>
     </div>
   );
 }
