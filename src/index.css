@@ -99,6 +99,8 @@ select {
   height: auto;
   width: 100%;
 
+  min-height: 500px;
+
   padding: 30px;
   border-radius: 15px;
 
