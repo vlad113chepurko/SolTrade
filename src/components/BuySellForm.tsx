@@ -1,18 +1,27 @@
-import { useState, useEffect } from "react";
-
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 export default function BuySellForm() {
-  const [token, setToken] = useState("");
-  const [amount, setAmount] = useState(0);
-  const [action, setAction] = useState("buy");
+  const [token, setToken] = useState<string>("");
+  const [amount, setAmount] = useState<number>(0);
+  const [action, setAction] = useState<"buy" | "sell">("buy");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    const res = axios.post(`http://localhost:5000/${action}`, {
+      userId: 1,
+      token,
+      amount,
+    });
+    console.log((await res).data);
+  };
 
   return (
     <div className="container">
       <h1>Buy / Sell </h1>
       <select
         name="action"
-        id="action  "
+        id="action"
         value={action}
-        onChange={(e) => setAction(e.target.value)}
+        onChange={(e) => setAction(e.target.value as "buy" | "sell")}
       >
         <option value="buy">Buy</option>
         <option value="sell">Sell</option>
@@ -28,7 +37,9 @@ export default function BuySellForm() {
         type="number"
         placeholder="Amount"
       />
-      <button>Submit</button>
+      <button type="button" onClick={handleSubmit}>
+        Submit
+      </button>
     </div>
   );
 }
