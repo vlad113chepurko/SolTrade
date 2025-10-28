@@ -31,11 +31,14 @@ body {
 }
 
 h1 {
-  font-size: 3.2em;
+  text-align: left;
+  align-self: center;
+  font-size: 2em;
   line-height: 1.1;
 }
 
 button {
+  width: 200px;
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
@@ -65,4 +68,41 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+input,
+select {
+  outline: none;
+  background: transparent;
+  box-sizing: border-box;
+  margin: 0;
+  font-size: 1em;
+}
+
+input,
+select {
+  font: inherit;
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: white;
+  width: 300px;
+  background-color: #1a1a1a;
+}
+
+/* my styles */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: auto;
+  width: 100%;
+
+  padding: 30px;
+  border-radius: 15px;
+
+  background: #333333;
+
+  gap: 30px;
 }
